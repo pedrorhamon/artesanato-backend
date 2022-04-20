@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.starking.artesanato.entity.Usuario;
@@ -13,6 +14,7 @@ import com.starking.artesanato.repositories.UsuarioRepository;
 import com.starking.artesanato.services.UsuarioService;
 import com.starking.artesanato.utils.ConstanteUtils;
 
+@Service
 public class UsuarioServiceImpl implements UsuarioService{
 	
 	private final UsuarioRepository usuarioRepository;
@@ -22,7 +24,6 @@ public class UsuarioServiceImpl implements UsuarioService{
 	public UsuarioServiceImpl(
 			UsuarioRepository usuarioRepository, 
 			PasswordEncoder encoder) {
-		super();
 		this.usuarioRepository = usuarioRepository;
 		this.encoder = encoder;
 	}
