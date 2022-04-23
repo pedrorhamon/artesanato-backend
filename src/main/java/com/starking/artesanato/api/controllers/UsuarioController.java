@@ -17,8 +17,12 @@ import com.starking.artesanato.exception.RegraNegocioException;
 import com.starking.artesanato.services.JwtService;
 import com.starking.artesanato.services.UsuarioService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/api/usuarios")
+@Api("Api de Usuário")
 public class UsuarioController {
 	
 	private UsuarioService usuarioService;
@@ -32,6 +36,7 @@ public class UsuarioController {
 	}
 	
 	@PostMapping("/autenticar")
+	@ApiOperation("Autenticar Usuário")
 	public ResponseEntity<?> autenticar( @RequestBody @Validated UsuarioDTO dto ) {
 		try {
 			Usuario usuarioAutenticado = this.usuarioService.autenticar(dto.getEmail(), dto.getSenha());
@@ -44,7 +49,8 @@ public class UsuarioController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<?> salvar( @RequestBody UsuarioDTO dto ) {
+	@ApiOperation("Cadastrar Usuário")
+	public ResponseEntity<?> salvar( @RequestBody @Validated UsuarioDTO dto ) {
 		Usuario usuario = Usuario.builder()
 					.nome(dto.getNome())
 					.email(dto.getEmail())
