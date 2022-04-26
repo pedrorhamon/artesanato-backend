@@ -10,7 +10,9 @@ import lombok.*;
 @AllArgsConstructor
 public class UsuarioDTO {
 
-	private String email;
 	private String nome;
+	private String cpf;
+	private String email;
+	private String celular;
 	private String senha;
 }

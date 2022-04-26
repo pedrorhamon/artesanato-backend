@@ -30,7 +30,7 @@ public class SwaggerConfig {
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder()
 				.title("Vendas de Peças de Artesanato API")
-				.description("Api do projeto de Vendas de Artesanato")
+				.description("Api de projeto de Vendas de Artesanato")
 				.version("1.0")
 				.contact(contact()).build();
 	}
