@@ -49,6 +49,8 @@ public class UsuarioServiceImpl implements UsuarioService{
 	@Transactional
 	public Usuario salvarUsuario(Usuario usuario) {
 		validarEmail(usuario.getEmail());
+		usuario.setCelular(usuario.getCelular());
+		usuario.setCpf(usuario.getCpf());
 		criptografarSenha(usuario);
 		return usuarioRepository.save(usuario);
 	}

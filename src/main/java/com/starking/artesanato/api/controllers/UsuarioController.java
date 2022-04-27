@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.starking.artesanato.api.dto.CredenciaisDTO;
 import com.starking.artesanato.api.dto.TokenDTO;
 import com.starking.artesanato.api.dto.UsuarioDTO;
 import com.starking.artesanato.entity.Usuario;
@@ -41,7 +42,7 @@ public class UsuarioController {
 	
 	@PostMapping("/autenticar")
 	@ApiOperation("Autenticar Usuário")
-	public ResponseEntity<?> autenticar( @RequestBody @Validated UsuarioDTO dto ) {
+	public ResponseEntity<?> autenticar( @RequestBody @Validated CredenciaisDTO dto ) {
 		try {
 			Usuario usuarioAutenticado = this.usuarioService.autenticar(dto.getEmail(), dto.getSenha());
 			String token = jwtService.gerarToken(usuarioAutenticado);
@@ -58,7 +59,9 @@ public class UsuarioController {
 		Usuario usuario = Usuario.builder()
 					.nome(dto.getNome())
 					.email(dto.getEmail())
-					.senha(dto.getSenha()).build();
+					.senha(dto.getSenha())
+					.celular(dto.getCelular())
+					.cpf(dto.getCpf()).build();
 		
 		try {
 			Usuario usuarioSalvo = this.usuarioService.salvarUsuario(usuario);
@@ -70,7 +73,7 @@ public class UsuarioController {
 	
 	@GetMapping("{id}")
 	@ApiOperation("Buscar Usuário por ID")
-	public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
+	public ResponseEntity<?> buscarPorId(@PathVariable("id") Long id) {
 		Optional<Usuario> usuario = this.usuarioService.obterPorId(id);
 		if(!usuario.isPresent()) {
 			return new ResponseEntity( HttpStatus.NOT_FOUND );

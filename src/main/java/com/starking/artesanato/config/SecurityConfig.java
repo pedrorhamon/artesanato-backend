@@ -45,6 +45,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public JwtTokenFilter jwtTokenFilter() {
 		return new JwtTokenFilter(jwtService, userDetailsService);
 	}
+	
+	
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -59,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.authorizeRequests()
 				.requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-				.antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
+				.antMatchers(HttpMethod.GET, "/api/usuarios/{id}").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/usuarios/autenticar").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
 				.anyRequest().authenticated()	
