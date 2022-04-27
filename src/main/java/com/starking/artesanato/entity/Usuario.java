@@ -1,6 +1,7 @@
 package com.starking.artesanato.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.br.CPF;
@@ -27,6 +28,7 @@ public class Usuario {
 	private String nome;
 	
 	@Column(name = "email")
+	@Email
 	private String email;
 	
 	@Column(name = "senha")
