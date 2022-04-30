@@ -1,5 +1,6 @@
 package com.starking.artesanato.services.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 	@Transactional
 	public Usuario salvarUsuario(Usuario usuario) {
 		validarEmail(usuario.getEmail());
+		usuario.setNome(usuario.getNome());
 		usuario.setCelular(usuario.getCelular());
 		usuario.setCpf(usuario.getCpf());
 		criptografarSenha(usuario);
@@ -72,5 +74,10 @@ public class UsuarioServiceImpl implements UsuarioService{
 	@Override
 	public Optional<Usuario> obterPorId(Long id) {
 		return usuarioRepository.findById(id);
+	}
+	
+	@Override
+	public List<Usuario> buscarTodos() {
+		return this.usuarioRepository.findAll();
 	}
 }

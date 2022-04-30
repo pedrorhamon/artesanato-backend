@@ -1,5 +1,6 @@
 package com.starking.artesanato.api.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +80,12 @@ public class UsuarioController {
 			return new ResponseEntity( HttpStatus.NOT_FOUND );
 		}
 		return ResponseEntity.ok(usuario);
+	}
+	
+	@GetMapping
+	@ApiOperation("Trás todos os Usuarios")
+	public ResponseEntity<List<Usuario>> buscaTodos() {
+		return new ResponseEntity(this.usuarioService.buscarTodos(), HttpStatus.OK);
 	}
 
 }

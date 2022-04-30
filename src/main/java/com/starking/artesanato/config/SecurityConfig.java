@@ -46,7 +46,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new JwtTokenFilter(jwtService, userDetailsService);
 	}
 	
-	
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -61,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.csrf().disable()
 			.authorizeRequests()
 				.requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-				.antMatchers(HttpMethod.GET, "/api/usuarios/{id}").permitAll()
+				.antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/usuarios/autenticar").permitAll()
 				.antMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
 				.anyRequest().authenticated()	
@@ -76,7 +75,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Bean
 	public FilterRegistrationBean<CorsFilter> corsFilter(){
 		
-		List<String> all = Arrays.asList("*");
+		List<String> all = Arrays.asList("http://localhost:3000");
 		
 		CorsConfiguration config = new CorsConfiguration();
 		config.setAllowedMethods(all);

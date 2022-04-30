@@ -25,7 +25,6 @@ public class SecurityUserDetailsService implements UserDetailsService {
 		return User.builder()
 				.username(usuarioEncontrado.getEmail())
 				.password(usuarioEncontrado.getSenha())
-				.roles("USER")
 				.build();
 	}
 

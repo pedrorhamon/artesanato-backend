@@ -13,10 +13,25 @@ import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 @Configuration
 @EnableSwagger2
-public class SwaggerConfig {
+public class SwaggerConfig implements WebMvcConfigurer{
 
+	@Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+
+        registry
+                .addResourceHandler("swagger-ui.html")
+                .addResourceLocations("classpath:/META-INF/resources/");
+
+        registry
+                .addResourceHandler("/webjars/**")
+                .addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
+	
 	@Bean
 	public Docket docket() {
 		return new Docket(DocumentationType.SWAGGER_2)
@@ -25,6 +40,7 @@ public class SwaggerConfig {
 				.paths(PathSelectors.any())
 				.build().securityContexts(Arrays.asList(securityContext())).securitySchemes(Arrays.asList(apiKey()))
 				.apiInfo(apiInfo());
+		
 	}
 
 	private ApiInfo apiInfo() {

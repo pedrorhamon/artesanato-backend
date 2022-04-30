@@ -24,7 +24,7 @@ public class Usuario {
 	private Long id;
 	
 	@Column(name = "nome")
-	@NotEmpty(message = "{campo.login.obrigatorio}")
+	@NotEmpty(message = "{campo.nome.obrigatorio}")
 	private String nome;
 	
 	@Column(name = "email")
